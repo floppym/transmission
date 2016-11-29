@@ -36,15 +36,14 @@ add_executable(${TR_NAME}-daemon
     ${${PROJECT_NAME}_HEADERS}
     ${${PROJECT_NAME}_WIN32_RC_FILE})
 
-set_target_properties(${TR_NAME}-daemon PROPERTIES
-    COMPILE_FLAGS "${SYSTEMD_CFLAGS}"
-    LINK_FLAGS "${SYSTEMD_LDFLAGS}"
+target_include_directories(${TR_NAME}-daemon PRIVATE
+    ${SYSTEMD_INCLUDE_DIR}
 )
 
 target_link_libraries(${TR_NAME}-daemon
     ${TR_NAME}
     ${EVENT2_LIBRARIES}
-    ${SYSTEMD_LIBRARIES}
+    ${SYSTEMD_LIBRARY}
 )
 
 tr_win32_app_info(${PROJECT_NAME}_remote_WIN32_RC_FILE
